@@ -19,17 +19,19 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-//댓글작성
+//댓글작성 -> 다른회원이 같은게시글을 선택해서 댓글을 쓸떄는 어떻게 해야하는가? -> 문제는 articles_idx를 com에넣는순간 get의 article이 null이됨
+//댓글을추가할떄마다 반복문이 이상하게 반복됨;;
 router.post("/", async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}
   try {
     const connection = await db.getConnection();
     await db.beginTransaction(connection);
     const commentResult = await comment.insert(connection, {
-      articles_idx: req.body.articles_idx,
+      articles_idx: body.articles_idx,
       // comment_see: body.comment_see,
       post_comment: body.post_comment,
       // post_see: body.post_see,
+      user_idx: body.user_idx,
     });
     await db.commit(connection);
     res.status(200).json({ commentResult });
@@ -47,8 +49,10 @@ router.put("/", async function (req, res, next) {
     await db.beginTransaction(connection);
     const commentResult = await comment.update(connection, {
       comment_idx: body.comment_idx,
-      articles_idx: body.articles_idx,
+      // user_idx: body.user_idx,
       post_comment: body.post_comment,
+      // user_idx: body.user_idx,
+      // articles_idx: body.articles_idx,
     });
     await db.commit(connection);
     res.status(200).json({ commentResult });
@@ -81,7 +85,7 @@ router.delete("/", async function (req, res, next) {
     const connection = await db.getConnection();
     await db.beginTransaction(connection);
     const commentResult = await comment.delete(connection, {
-      articles_idx: req.query.articles_idx,
+      user_idx: req.query.user_idx,
       post_comment: body.post_comment,
       user_idx: body.user_idx,
     });

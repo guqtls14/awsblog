@@ -98,13 +98,16 @@ module.exports.detailput = async (
 //   });
 // };
 //comment, user 포함 detailget
+// select *from article left outer join comment on article.user_idx = comment.user_idx left outer join users on article.user_idx = users.user_idx WHERE article.articles_idx = "${options.articles_idx}"
+//comment.users_user_idx 는 user에 대한 참조값
 module.exports.detailgetList = (connection, options) => {
   console.log("options : ", options);
   return new Promise((resolve, reject) => {
     connection.query(
-      `select *
-      from article left outer join comment on article.articles_idx = comment.articles_idx
-      left outer join users on article.user_idx = users.user_idx WHERE article.articles_idx = "${options.articles_idx}"`,
+      `select * 
+      from article 
+      left join users on article.user_idx = users.user_idx
+       WHERE article.articles_idx = "${options.articles_idx}"`,
       (error, results, fields) => {
         if (error) {
           //When done with the connection, release it.

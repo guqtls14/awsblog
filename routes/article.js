@@ -5,7 +5,7 @@ const article = require("../models/article");
 const post_img = require("../models/post_img");
 const util = require("../components/util");
 const db = require("../components/db");
-
+const comment = require("../models/comment");
 router.get("/", async function (req, res, next) {
   try {
     // const limit = 2;
@@ -80,16 +80,21 @@ router.get("/detail", async function (req, res, next) {
   try {
     const connection = await db.getConnection();
     const results = await article.detailgetList(connection, {
-      articles_idx: req.query.articles_idx,
+      articles_idx: req.body.articles_idx,
       // comment: req.body.comment_idx,
       // user: req.body.user_idx,
     }); //a query
+    console.log("results : ", results);
     for (let i = 0; i < results.length; i++) {
       const ImgResult = await post_img.getList(connection, {
         articles_idx: results[i].articles_idx,
       });
       results[i].Img = ImgResult;
 
+      const commentResult = await comment.getList(connection, {
+        articles_idx: results[i].articles_idx,
+      });
+      results[i].Comment = commentResult;
       // const articleResult = await article.getList(connection, {
       //   articles_idx: results[i].articles_idx,
       // });
@@ -143,6 +148,10 @@ router.get("/page", async function (req, res, next) {
         articles_idx: results[i].articles_idx,
       });
       results[i].Img = ImgResult;
+      const commentResult = await comment.getList(connection, {
+        articles_idx: results[i].articles_idx,
+      });
+      results[i].Comment = commentResult;
     }
     res.status(200).json({ results });
   } catch (err) {

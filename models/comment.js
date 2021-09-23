@@ -4,13 +4,13 @@ module.exports.getList = async (
   connection, // PoolConnection
   options // {idx, name}
 ) => {
-  let query = `SELECT * FROM comment
-              LEFT JOIN article ON comment.articles_idx = article.articles_idx`;
+  //SELECT * FROM comment LEFT JOIN article ON comment.user_idx = article.user_idx
+  let query = `SELECT * FROM comment`;
   let values = [];
   if (options) {
-    if (options.comment_idx) {
-      query += " WHERE comment.comment_idx = ?";
-      values.push(options.comment_idx);
+    if (options.articles_idx) {
+      query += " WHERE comment.articles_idx = ?";
+      values.push(options.articles_idx);
     }
   }
   return await db.query(connection, {
@@ -78,8 +78,7 @@ module.exports.update = (connection, options) => {
   console.log("options : ", options);
   return new Promise((resolve, reject) => {
     connection.query(
-      `UPDATE comment SET post_comment = "${options.post_comment}" ,
-      articles_idx = "${options.articles_idx}"
+      `UPDATE comment SET post_comment = "${options.post_comment}"
       where comment_idx = "${options.comment_idx}"`,
       (error, results, fields) => {
         if (error) {
