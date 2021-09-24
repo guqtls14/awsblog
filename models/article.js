@@ -259,6 +259,7 @@ module.exports.Seeupdate = (connection, options) => {
 // };
 
 module.exports.Starupdate = (connection, options) => {
+  // `UPDATE  article SET star = star + 1 WHERE articles_idx = ${options.articles_idx}`;
   // `UPDATE  article SET star = IFNULL(${options.star},0)+1 WHERE articles_idx = ${options.articles_idx}`
   //  sql: 'UPDATE  article SET star += 1 WHERE articles_idx = 3' ????
   console.log("options : ", options);
@@ -277,16 +278,33 @@ module.exports.Starupdate = (connection, options) => {
   });
 };
 //스타횟수 보기
+// module.exports.stargetList = async (
+//   connection, // PoolConnection
+//   options // {idx, name}
+// ) => {
+//   let query = `SELECT * FROM article`;
+//   let values = [];
+//   if (options) {
+//     if (options.articles_idx) {
+//       query += " WHERE articles_idx = ?";
+//       values.push(options.articles_idx);
+//     }
+//   }
+//   return await db.query(connection, {
+//     query: query,
+//     values: values,
+//   });
+// };
 module.exports.stargetList = async (
   connection, // PoolConnection
   options // {idx, name}
 ) => {
-  let query = `SELECT * FROM article`;
+  let query = `SELECT star FROM article`;
   let values = [];
   if (options) {
-    if (options.articles_idx) {
-      query += " WHERE articles_idx = ?";
-      values.push(options.articles_idx);
+    if (options.star) {
+      query += " WHERE star = ?";
+      values.push(options.star);
     }
   }
   return await db.query(connection, {

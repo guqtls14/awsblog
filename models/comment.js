@@ -132,9 +132,9 @@ module.exports.delete = async (connection, options) => {
   let query = `DELETE FROM comment`;
   let values = [];
   if (options) {
-    if (options.articles_idx) {
-      query += " WHERE articles_idx = ?";
-      values.push(options.brand_idx);
+    if (options.comment_idx) {
+      query += " WHERE comment_idx = ?";
+      values.push(options.comment_idx);
     }
   }
   return await db.query(connection, {

@@ -80,14 +80,13 @@ router.put("/commentSee", async function (req, res, next) {
 });
 //댓글삭제
 router.delete("/", async function (req, res, next) {
-  const body = req.body; // {name:asdf,price:200}
   try {
     const connection = await db.getConnection();
     await db.beginTransaction(connection);
     const commentResult = await comment.delete(connection, {
-      user_idx: req.query.user_idx,
-      post_comment: body.post_comment,
-      user_idx: body.user_idx,
+      comment_idx: req.query.comment_idx,
+      // post_comment: body.post_comment,
+      // user_idx: body.user_idx,
     });
     await db.commit(connection);
     res.status(200).json({ commentResult });
