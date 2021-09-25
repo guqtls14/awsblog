@@ -1,7 +1,9 @@
 ### 칼럼소개
 
 - promary key: 다른 여러종류의 칼럼과 구별하기위한 일종의 사람이름과같은 유니크한 칼럼
-  \*\* article 테이블 칼럼 소개
+  </br>
+
+## article 테이블 칼럼 소개
 
 ```
 star : 추천수
@@ -15,7 +17,7 @@ category_idx : 카테고리
 content : 게시글내용
 ```
 
-\*\* users 테이블 칼럼 소개
+## users 테이블 칼럼 소개
 
 ```
 user_idx: primary key
@@ -24,7 +26,7 @@ user_pwd:pwd,
 user_name:닉네임
 ```
 
-\*\* comment테이블의 칼럼소개
+## comment테이블의 칼럼소개
 
 ```
 comment_idx: primary key
@@ -33,7 +35,7 @@ user_idx:댓글쓰는회원
 articles_idx:댓글쓰는 게시글
 ```
 
-\*\* post_img 테이블의 칼럼소개
+## post_img 테이블의 칼럼소개
 
 ```
 img_idx: primary key`
@@ -41,7 +43,7 @@ img_paht: 이미지가 저장되는 storage의 주소
 articles_idx: 이미지가 입력되는 게시글의 idx
 ```
 
-\*\* category 테이블의 칼럼소개
+##category 테이블의 칼럼소개
 
 ```
 category_idx : primary key
