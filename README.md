@@ -60,6 +60,5 @@ category_name : 카테고리이름
 1. article api 소개
 
 - get(전체목록 조회api)
-
-![Uploading 스크린샷 2021-09-25 오전 11.04.26.png…]()
+<img width="896" alt="스크린샷 2021-09-25 오전 11 04 26" src="https://user-images.githubusercontent.com/62092273/134754755-7c663a44-0c7f-49df-a7c1-128575665872.png">
 
