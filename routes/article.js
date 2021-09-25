@@ -199,16 +199,12 @@ router.post("/", async function (req, res, next) {
     await db.beginTransaction(connection);
     const articleDate = util.getCurrentTime();
     const articleResult = await article.insert(connection, {
-      // articles_idx: req.query.articles_idx,
       post_write: body.post_write,
-      // post_comment: body.post_comment,
       post_Date: articleDate,
       user_idx: body.user_idx,
       category_idx: body.category_idx,
       post_title: body.post_title,
       content: body.content,
-      // comment_see: body.comment_see,
-      // thumb_content: body.thumb_content,
     });
     await db.commit(connection);
     res.status(200).json({ articleResult });

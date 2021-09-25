@@ -6,12 +6,11 @@ const db = require("../components/db");
 
 router.get("/", async function (req, res, next) {
   try {
-    const { comment_idx } = req.query;
+    const { articles_idx } = req.query;
     const connection = await db.getConnection();
     const results = await comment.getList(connection, {
-      comment_idx: comment_idx,
+      articles_idx: articles_idx,
     }); //a query
-
     res.status(200).json({ results });
   } catch (err) {
     console.log("comment get error : ", err);
