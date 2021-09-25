@@ -1,5 +1,8 @@
 ### 칼럼소개
 
+- promary key: 다른 여러종류의 칼럼과 구별하기위한 일종의 사람이름과같은 유니크한 칼럼
+  \*\* article 테이블 칼럼 소개
+
 ```
 star : 추천수
 post_title : 게시글 제목
@@ -10,97 +13,37 @@ post_see : 조회수
 user_idx : 로그인한 사용자
 category_idx : 카테고리
 content : 게시글내용
-thumb_content : 게시글 소개
-
 ```
 
-### users api
-
-#### post signup(회원가입)
+\*\* users 테이블 칼럼 소개
 
 ```
-회원id, pwd , name 넣어서 가입
-{
-"user_id":"kim",
-"user_pwd":"123",
-"user_name":"김민수"
-}
+user_idx: primary key
+user_id: id,
+user_pwd:pwd,
+user_name:닉네임
 ```
 
-salt는 암호의 보안성을 높이기 위해 사용되고 일방향성을 가진 해쉬를 생성할떄 무작위 문자열을 생성하여 추가 (cypto js로 여러 암호화 알고리즘을 사용하게 해주는 모듈)
-
-#### post signin(로그인)
+\*\* comment테이블의 칼럼소개
 
 ```
-아이디랑 비밀번호로 확인
-req
-{
-"user_id":"123ddㅜㅓ",
-"user_pwd":"asd"
-}
+comment_idx: primary key
+post_comment:댓글내용
+user_idx:댓글쓰는회원
+articles_idx:댓글쓰는 게시글
 ```
 
-```
-res
-{
-"login": true,
-"result": {
-"user_idx": 6,
-"user_id": "123ddㅜㅓ",
-"user_name": "ㅊㄹ"
-}
-}
-```
-
-#### put 회원정보 수정
+\*\* post_img 테이블의 칼럼소개
 
 ```
-req
-{
-"user_idx" : 5,
-"user_id" : "kim",
-"user_pwd": "322",
-"user_name": "wwww"
-}
+img_idx: primary key`
+img_paht: 이미지가 저장되는 storage의 주소
+articles_idx: 이미지가 입력되는 게시글의 idx
 ```
 
-```
-res
-{
-"results": {
-"fieldCount": 0,
-"affectedRows": 1,
-"insertId": 0,
-"serverStatus": 3,
-"warningCount": 0,
-"message": "(Rows matched: 1 Changed: 1 Warnings: 0",
-"protocol41": true,
-"changedRows": 1
-}
-}
-```
-
-#### delete 회원정보 삭제
+\*\* category 테이블의 칼럼소개
 
 ```
-req
-{
-"user_idx":"4"
-}
-```
-
-```
-req
-{
-"results": {
-"fieldCount": 0,
-"affectedRows": 1,
-"insertId": 0,
-"serverStatus": 3,
-"warningCount": 0,
-"message": "",
-"protocol41": true,
-"changedRows": 0
-}
-}
+category_idx : primary key
+category_name : 카테고리이름
 ```
