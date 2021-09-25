@@ -62,3 +62,17 @@ category_name : 카테고리이름
 - get(전체목록 조회api)
 <img width="896" alt="스크린샷 2021-09-25 오전 11 04 26" src="https://user-images.githubusercontent.com/62092273/134754755-7c663a44-0c7f-49df-a7c1-128575665872.png">
 
+<img width="899" alt="스크린샷 2021-09-25 오전 11 04 44" src="https://user-images.githubusercontent.com/62092273/134754790-83cc6383-5da4-44e6-9fad-4a2aa7f45f11.png">
+
+</br>
+이러한 결과값이 나오는것을 알수있다.
+
+ - 게시글 수정 api(put)
+ <img width="1332" alt="스크린샷 2021-09-25 오전 11 28 28" src="https://user-images.githubusercontent.com/62092273/134754876-5c6fa82c-efb3-410d-81a4-64e2aabbdf22.png">
+ 
+ client는 body부분에 수정하고싶은 게시글의 post_write,user_idx,category_idx,post_title,content를 입력후 수정을한다.
+ </br>
+ </br>
+ </br>
+ - 게시글 작성 api(post)
+![스크린샷 2021-09-25 오전 11 34 04](https://user-images.githubusercontent.com/62092273/134755030-12715dfd-6e58-40a0-9d64-379b5c541496.png)
