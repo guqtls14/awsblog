@@ -43,9 +43,22 @@ img_paht: 이미지가 저장되는 storage의 주소
 articles_idx: 이미지가 입력되는 게시글의 idx
 ```
 
-##category 테이블의 칼럼소개
+## category 테이블의 칼럼소개
 
 ```
 category_idx : primary key
 category_name : 카테고리이름
 ```
+
+</br>
+</br>
+</br>
+</br>
+
+## api소개
+
+1. article api 소개
+
+- get(전체목록 조회api)
+
+![](./shinhyuplo/데스크탑/스크린샷 2021-09-25 오전 11.04.44.png)
