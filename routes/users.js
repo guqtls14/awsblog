@@ -62,6 +62,8 @@ router.post("/signin", async function (req, res, next) {
     const userList = await users.getList(connection, {
       user_id: body.user_id,
     }); // = [user]
+    console.log("userList : ", userList);
+    console.log("userList1 : ", userList[0]);
     if (userList.length == 0) {
       return res.status(404).json({ errorMessage: "User not found" });
     }

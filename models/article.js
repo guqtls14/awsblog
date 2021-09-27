@@ -114,6 +114,7 @@ module.exports.detailgetList = (connection, options) => {
           connection.release(); //무조건해줘야함
           reject(error);
         }
+        connection.release(); //무조건해줘야함
         resolve(results);
       }
     );
@@ -131,6 +132,7 @@ module.exports.pagegetList = (connection, options) => {
           connection.release(); //무조건해줘야함
           reject(error);
         }
+        connection.release();
         resolve(results);
       }
     );
@@ -149,6 +151,7 @@ module.exports.SearchgetList = (connection, options) => {
           connection.release(); //무조건해줘야함
           reject(error);
         }
+        connection.release(); //무조건해줘야함
         resolve(results);
       }
     );
@@ -212,6 +215,7 @@ module.exports.Seeupdate = (connection, options) => {
           connection.release(); //무조건해줘야함
           reject(error);
         }
+        connection.release(); //무조건해줘야함
         resolve(results);
       }
     );
@@ -272,6 +276,7 @@ module.exports.Starupdate = (connection, options) => {
           connection.release(); //무조건해줘야함
           reject(error);
         }
+        connection.release(); //무조건해줘야함
         resolve(results);
       }
     );

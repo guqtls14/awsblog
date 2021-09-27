@@ -76,7 +76,7 @@ router.put("/detail", async function (req, res, next) {
   }
 });
 
-//상세페이지보기
+//상세페이지보기 -> pwd,salt 지우기
 router.get("/detail", async function (req, res, next) {
   try {
     const connection = await db.getConnection();
@@ -86,6 +86,9 @@ router.get("/detail", async function (req, res, next) {
       // user: req.body.user_idx,
     }); //a query
     console.log("results : ", results);
+    let user = results[0];
+    delete user.user_pwd;
+    delete user.salt;
     for (let i = 0; i < results.length; i++) {
       const ImgResult = await post_img.getList(connection, {
         articles_idx: results[i].articles_idx,
@@ -96,10 +99,6 @@ router.get("/detail", async function (req, res, next) {
         articles_idx: results[i].articles_idx,
       });
       results[i].Comment = commentResult;
-      // const articleResult = await article.getList(connection, {
-      //   articles_idx: results[i].articles_idx,
-      // });
-      // results[i].article = articleResult;
     }
     res.status(200).json({ results });
   } catch (err) {
@@ -137,13 +136,16 @@ router.get("/page", async function (req, res, next) {
     const page = req.query.page;
     // // calculate offset
     const offset = (page - 1) * limit;
-    // query for fetching data with page number and offset
+    // query for fetching data with page number and offset제가이
     const connection = await db.getConnection();
     const results = await article.pagegetList(connection, {
-      page: req.query.page,
+      page: page,
       offset: offset,
       limit: limit,
     }); //a query
+    // let user = results[0];
+    // delete user.user_pwd;
+    // delete user.salt;
     for (let i = 0; i < results.length; i++) {
       const ImgResult = await post_img.getList(connection, {
         articles_idx: results[i].articles_idx,
@@ -156,7 +158,7 @@ router.get("/page", async function (req, res, next) {
     }
     res.status(200).json({ results });
   } catch (err) {
-    console.log("article get error : ", err);
+    console.log("err! : ", err);
     next();
   }
 });
@@ -199,7 +201,7 @@ router.post("/", async function (req, res, next) {
     await db.beginTransaction(connection);
     const articleDate = util.getCurrentTime();
     const articleResult = await article.insert(connection, {
-      post_write: body.post_write,
+      // post_write: body.post_write,
       post_Date: articleDate,
       user_idx: body.user_idx,
       category_idx: body.category_idx,
