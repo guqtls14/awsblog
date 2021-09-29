@@ -5,12 +5,29 @@ const crypto = require("../components/crypto");
 const users = require("../models/users");
 const fs = require("fs");
 /* GET users listing. */
-router.get("/", async function (req, res, nexPt) {
+router.get("/", async function (req, res, next) {
   try {
-    const { user_idx } = req.query;
+    const { user_idx, user_id } = req.query;
     const connection = await db.getConnection();
     const results = await users.getList(connection, {
       user_idx: user_idx,
+      user_id: user_id,
+    });
+    console.log("results : ", results); // results : [rowData {1,2,3,4...}]
+    res.status(200).json({ results });
+  } catch (err) {
+    console.log("err : ", err);
+    next();
+  }
+});
+
+router.get("/detail", async function (req, res, next) {
+  try {
+    const { user_id } = req.query;
+    const connection = await db.getConnection();
+    const results = await users.detailgetList(connection, {
+      // user_idx: user_idx,
+      user_id: user_id,
     });
     console.log("results : ", results); // results : [rowData {1,2,3,4...}]
     res.status(200).json({ results });
@@ -28,7 +45,7 @@ router.post("/signup", async function (req, res, next) {
     const connection = await db.getConnection();
     //중복아이디체크
     await db.beginTransaction(connection);
-    const userList = await users.getList(connection, {
+    const userList = await users.signupgetList(connection, {
       user_id: body.user_id, //[]의형태로 가져옴 -> 그냥규칙임 암기하셈
     });
     console.log("body.user_id : ", body.user_id);
@@ -55,12 +72,14 @@ router.post("/signup", async function (req, res, next) {
 router.post("/signin", async function (req, res, next) {
   //{user_idx:??,user_pwd:??}
   const body = req.body;
+  console.log("body : ", req.body);
   try {
     // 아이디와 pwd가 존재 할 때 true
     const connection = await db.getConnection();
     await db.beginTransaction(connection);
-    const userList = await users.getList(connection, {
+    const userList = await users.signingetList(connection, {
       user_id: body.user_id,
+      // user_pwd: body.user_pwd,
     }); // = [user]
     console.log("userList : ", userList);
     console.log("userList1 : ", userList[0]);
